@@ -21,6 +21,7 @@ var config = {
 			'./src/css/bootstrap.min.css',
 			'./src/css/bootstrap-theme.min.css'
 		],
+		images: './src/images/*.*',
 		mainJs: './src/main.js'
 	}
 }
@@ -58,6 +59,8 @@ gulp.task('css', function() {
 gulp.task('watch', function() {
 	gulp.watch(config.paths.html, ['html']);
 	gulp.watch(config.paths.mainJs, ['js', 'lint']);
+	gulp.watch(config.paths.js, ['js', 'lint'])
+	gulp.watch(config.paths.images, ['images']);
 
 })
 
@@ -75,5 +78,11 @@ gulp.task('lint', function() {
 	.pipe(lint.format());
 })
 
+gulp.task('images', function() {
+	gulp.src(config.paths.images)
+		.pipe(gulp.dest(config.paths.dist + "/images"))
+		.pipe(connect.reload());
+})
+
 //Default behavior if you just type gulp in this directory
-gulp.task('default', ['html', 'css', 'js', 'lint', 'open', 'watch']);
+gulp.task('default', ['html', 'css', 'js', 'images', 'lint', 'open', 'watch']);
