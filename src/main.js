@@ -1,35 +1,14 @@
 //main.js acts as an entrypoint for the react application
-
+"use strict";
 //Put jQuery in the global namespace for Bootstrap's benefit
-$ = jQuery = require('jquery');
 var React = require('react');
-var Home = require('./components/homePage');
-var About = require('./components/about/aboutPage');
-var Header = require('./components/common/header');
-var Authors = require('./components/authors/authorPage');
+var Router = require('react-router');
+var routes = require('./routes');
 
-var App = React.createClass( {
-	render: function () {
-		var Child;
-		switch(this.props.route) {
-			case 'about': Child = About; break;
-			case 'authors': Child = Authors; break;
-			default: Child = Home;
-		}
-		return (
-				<div>
-					<Header />
-					<Child />
-				</div>
-			);
-	}
+//To use HTML5 push-state to keep navigation history instead of #, add the second param
+//to the run function. This may have changed in newer versions of React.
+//Router.run(routes, Router.HistoryLocation, function(Handler) {
+Router.run(routes, function(Handler) {
+	//The Handler is passed in by react router.
+	React.render(<Handler />, document.getElementById('app'));
 });
-
-function render(){
-	var route = window.location.hash.substr(1);
-	React.render(<App route={route} />, document.getElementById('app'));
-}
-
-window.addEventListener('hashchange', render);
-
-render();

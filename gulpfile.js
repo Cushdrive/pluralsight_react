@@ -19,7 +19,8 @@ var config = {
 		node_modules: './node_modules',
 		css: [
 			'./src/css/bootstrap.min.css',
-			'./src/css/bootstrap-theme.min.css'
+			'./src/css/bootstrap-theme.min.css',
+			'./src/css/toastr.css'
 		],
 		images: './src/images/*.*',
 		mainJs: './src/main.js'
@@ -59,7 +60,7 @@ gulp.task('css', function() {
 gulp.task('watch', function() {
 	gulp.watch(config.paths.html, ['html']);
 	gulp.watch(config.paths.mainJs, ['js', 'lint']);
-	gulp.watch(config.paths.js, ['js', 'lint'])
+	gulp.watch(config.paths.js, ['js', 'lint']);
 	gulp.watch(config.paths.images, ['images']);
 
 })
