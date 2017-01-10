@@ -4,6 +4,10 @@
 var React = require('react');
 var Router = require('react-router');
 var routes = require('./routes');
+var InitializeActions = require('./actions/initializeActions');
+
+//Call the action to setup the data for the first time.
+InitializeActions.initApp();
 
 //To use HTML5 push-state to keep navigation history instead of #, add the second param
 //to the run function. This may have changed in newer versions of React.
